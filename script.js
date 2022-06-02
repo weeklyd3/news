@@ -58,3 +58,14 @@ function initEditor() {
         document.getElementById('editor').innerHTML = text;
     });
 }
+function preview() {
+    const p = new FormData();
+    p.set('text', document.getElementById('contents').value);
+    fetch(`${apiURL}/parse.php`, {body: p, method: 'POST'})
+    .then(function(res) {
+        return res.json();
+    })
+    .then(function(text) {
+        document.getElementById('preview-area').innerHTML = text;
+    });
+}

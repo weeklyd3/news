@@ -13,3 +13,7 @@
     top: -8888px;
     left: -8888px;
 }
+#preview-area {
+    padding: 7px;
+    border: 1px dotted gray;
+}

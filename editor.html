@@ -7,15 +7,19 @@
     <label>
         <span class="hidden2eyes">
             Article contents:</span>
-    <textarea rows="10" cols="50" name="contents" placeholder="Enter contents here" style="box-sizing: border-box; width: 100%;">&lt;-- Welcome to the editor!
+    <textarea rows="20" cols="50" name="contents" placeholder="Enter contents here" id="contents" style="box-sizing: border-box; width: 100%;">&lt;!-- Welcome to the editor!
 You can write new articles using this form. Comments enclosed like this will not show.
     
 We use Markdown for formatting. If you don't know it, you can learn it here: https://www.markdowntutorial.com
     
-Be sure to write BELOW the arrows and closing --> or all your work will not be shown!
+Be sure to write BELOW the arrows and closing right-facing arrow or all your work will not be shown!
 
 Write your article below here:
 &darr;&darr;&darr;&darr;&darr;&darr;&darr;&darr;&darr;&darr;
 -->
 </textarea></label>
+    <div id="preview-area"></div>
+    <input type="button" value="Preview" onclick="preview()" />
+    <p>Are you done? Really?</p>
+    <p>If you are done, please preview the post to check for errors and then post it.</p>
 </form>
