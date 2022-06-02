@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title id="taitl">Create Account</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <script src="script.js"></script>
+</head>
+
+<body id="baudy" style="text-align: center;">
+    <h1>Create an account</h1>
+    <p>Creating an account is entirely optional. It allows you to create new articles. (Well, not yet, but still.)</p>
+    <form onsubmit="createAccount()" action="javascript:;">
+    <label>Username: <input name="username" id="username" /></label><br />
+        <label>Password: <input id="password" name="password" type="password" /></label>
+        <div id="feedback"></div>
+        <input type="submit" value="Create account" />
+    </form>
+    <script>
+        function createAccount() {
+            const f = new FormData(document.querySelector('form'));
+            fetch(`${apiURL}/createaccount.php`, {credentials: 'include', method: 'POST', 'body': f})
+            .then(function(res) {
+                return res.json();
+            }, function() {
+                document.getElementById('feedback').textContent = 'Network faliure, please try again later. Sorry.';
+                throw new Exception('network faliure');
+            })
+            .then(function(j) {
+                if (!j.status) {
+                    document.getElementById('feedback').textContent = 'Sorry, that username is taken.';
+                    throw new Error('Username taken');
+                } else {
+                    document.getElementById('feedback').textContent = 'Account created. Logging in...';
+                    f.set('user', document.getElementById('username').value);
+                    return fetch(`${apiURL}/login.php`, {credentials: 'include', body: f, method: 'POST'});
+                }
+            })
+            .then(function() {
+                window.opener.refreshLogin();
+                window.close();
+            });
+        }
+    </script>
+</body>
+</html>

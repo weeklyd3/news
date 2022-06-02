@@ -1,0 +1,15 @@
+@import url('https://harmlesswebsite.leoshi6.repl.co/style.css');
+.header {
+    background-color: #33d17a;
+    color: black;
+    display: flex;
+    flex-wrap: wrap;
+}
+.header > div {
+    padding: 7px;
+}
+.hidden2eyes {
+    position: fixed; 
+    top: -8888px;
+    left: -8888px;
+}

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title id="taitl">weeklyd3's article site</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <script src="script.js"></script>
+</head>
+
+<body id="baudy">
+    <header class="header">
+        <div>
+            <a href="#">weeklyd3's article site</a>
+        </div>
+        <div style="margin-left: auto;">
+            <span id="login">Loading account information...</span>
+            <span id="loggedin" hidden="hidden"><span id="active-name">$USERNAME</span> (<button onclick="startLogout()">Log out</button>)</span>
+                <span id="notloggedin" hidden="hidden">Not logged in. <button onclick="startLogin();">Log in</button> or <button onclick="startSignup();">sign up</button></span>
+                <span id="loginStatusError" hidden="hidden">Account info could not be loaded</span>
+            <span id="logout" hidden="hidden">Logging out...</span>
+        </div>
+    </header>
+    <main>
+        <div id="homescreen">
+        <h1>Home screen</h1>
+        <div id="newarticle" hidden="hidden"><button onclick="this.parentNode.hidden = 'hidden'; document.getElementById('editor').hidden = ''; initEditor();">Create article</button></div>
+        </div>
+        <div id="editor" hidden="hidden">
+            Loading...
+        </div>
+    </main>
+</body>
+</html>

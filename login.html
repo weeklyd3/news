@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title id="taitl">Log in</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <script src="script.js"></script>
+</head>
+
+<body id="baudy" style="text-align: center;">
+    <h1>Log in</h1>
+    <p>Please enter a username and password you registered earlier.</p>
+    <script>
+        function stepOne() {
+            const f = new FormData(document.getElementById('step1'));
+            document.getElementById('username').disabled = 'disabled';
+            document.getElementById('usernamestatus').textContent = 'Checking...';
+            fetch(`${apiURL}/login.php`, {
+                "method": "POST",
+                "body": f,
+                credentials: 'include'
+            })
+            .then(function(res) {
+                return res.json();
+            })
+            .then(function(json) {
+                if (json.message === 'No such user') {
+                    document.getElementById('username').disabled = '';
+                    document.getElementById('usernamestatus').textContent = 'Could not find an account with that username';
+                } else {
+                    document.getElementById('step1').hidden = 'hidden';
+                    document.getElementById('password').focus();
+                    document.getElementById('login-username').textContent = document.getElementById('username').value;
+                    document.getElementById('step2').hidden = '';
+                }
+            });
+        }
+        function stepTwo() {
+            const f = new FormData(document.getElementById('step2'));
+            f.set('user', document.getElementById('username').value);
+            document.getElementById('password').disabled = 'disabled';
+            document.getElementById('level2status').textContent = 'Verifying password. Hang on...';
+            fetch(`${apiURL}/login.php`, {
+                "method": "POST",
+                "body": f,
+                credentials: 'include'
+            })
+            .then(function(res) {
+                return res.json();
+            })
+            .then(function(json) {
+                if (json.status) {
+                    window.opener.refreshLogin();
+                    window.close();
+                } else {
+                    document.getElementById('password').disabled = '';
+                    document.getElementById('level2status').textContent = 'Bad password.';
+                }
+            });
+        }
+    </script>
+    <form action="javascript:;" onsubmit="stepOne()" id="step1">
+        <label><span class="hidden2eyes">Enter your username:</span>
+        <input name="user" style="display: block; width: 90%; font-size: 150%;" autofocus="autofocus" id="username" placeholder="Enter your username" />
+        </label>
+        <div id="usernamestatus"></div>
+    </form>
+    <form hidden="hidden" id="step2" action="javascript:;" onsubmit="stepTwo()">
+        <span style="color: green;">
+            Username: <span id="login-username">$USERNAME</span> &#10004;
+        </span>
+        <label>
+            <span class="hidden2eyes">Enter your password:</span>
+            <input style="display: block; width: 90%; font-size: 150%;" id="password" placeholder="Enter your password" name="password" type="password" />
+        </label>
+        <div id="level2status"></div>
+    </form>
+</body>
+</html>
