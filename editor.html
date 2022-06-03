@@ -1,4 +1,4 @@
-<form>
+<form onsubmit="if (confirm('Really post your article?')) postArticle();" action="javascript:;">
     <span class="hidden2eyes"><h2>Create a new article</h2></span>
     <label>
         <span class="hidden2eyes">Article title:</span>
@@ -19,7 +19,10 @@ Write your article below here:
 -->
 </textarea></label>
     <div id="preview-area"></div>
-    <input type="button" value="Preview" onclick="preview()" />
+    <input type="button" value="Preview" onclick="preview(this)" />
     <p>Are you done? Really?</p>
     <p>If you are done, please preview the post to check for errors and then post it.</p>
+    <p><small>By publishing changes, you agree to irrevocably release your changes under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>, and the <a href="https://www.gnu.org/licenses/fdl-1.3.en.html">GFDL 1.3</a> or any later version.</small></p>
+    <input type="submit" value="Post Article" />
+    <pre id="poststatus"></pre>
 </form>

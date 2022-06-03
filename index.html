@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
   <title id="taitl">weeklyd3's article site</title>
   <link href="style.css" rel="stylesheet" type="text/css" />
-  <script src="script.js"></script>
+    <script>                var backToHomeURL = new URL(location.href);
+                backToHomeURL.searchParams.delete('article');</script>
 </head>
 
 <body id="baudy">
@@ -23,12 +24,40 @@
     </header>
     <main>
         <div id="homescreen">
-        <h1>Home screen</h1>
+        <h1>Latest articles</h1>
         <div id="newarticle" hidden="hidden"><button onclick="this.parentNode.hidden = 'hidden'; document.getElementById('editor').hidden = ''; initEditor();">Create article</button></div>
-        </div>
         <div id="editor" hidden="hidden">
             Loading...
         </div>
+            <div id="latest-articles-loading">
+                Please wait while we fetch the latest articles, just for you...
+            </div>
+            <div id="la-wrapper" hidden="hidden">
+            <div id="latest-articles"></div>
+            </div>
+            <center>
+                Page <span id="pagenum">1</span> (<button onclick="getArticles(globalThis.page - 1);" id="prev">prev</button> | <button onclick="getArticles(globalThis.page + 1);" id="next">next</button>)
+            </center>
+        </div>
+        <div id="article-viewer" hidden="hidden">
+            <h1 id="articletitle">Article title here</h1>
+        <article id="articleContents">Article contents here</article>
+            <a href="" id="goback">Back to all articles</a>
+        </div>
+        <div id="article-loading" hidden="hidden">
+            <div style="text-align: center;">Please wait while we load the contents of this article...</div>
+        </div>
+        <div id="article-not-found" hidden="hidden">
+            <h1>Sorry.</h1>
+            <p>We could not found the article you requested. Maybe your article ID was wrong?</p>
+            <p>Sorry for sounding blunt, but it's probably your problem.</p>
+            <a id="backToHome">Go back to the list of articles?</a>
+            <script>
+                document.getElementById('backToHome').href = backToHomeURL;
+                document.getElementById('goback').href = backToHomeURL;
+            </script>
+        </div>
     </main>
+  <script src="script.js"></script>
 </body>
 </html>
