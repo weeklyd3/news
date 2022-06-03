@@ -134,8 +134,9 @@ function getArticles(page, changeURL = true) {
     document.getElementById('pagenum').textContent = page;
     if (page === 1) {
         document.getElementById('prev').disabled = 'disabled';
-    }
-    fetch(`${apiURL}/articleList.php?limit=20&offset=${(page - 1) * 20}`)
+    } else document.getElementById('prev').disabled = '';
+    document.getElementById('latest-articles').innerHTML = '';
+    fetch(`${apiURL}/articleList.php?limit=20&start=${(page - 1) * 20}`)
         .then(function(js) {
             return js.json();
         })
