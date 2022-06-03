@@ -4,6 +4,13 @@
         <span class="hidden2eyes">Article title:</span>
         <input style="display: block; width: 100%; font-size: 1.5em; box-sizing: border-box;" name="title" placeholder="Article title" />
     </label>
+    <div style="width: 100%;" class="toolbar"><button onclick="surroundSelection(document.querySelector('textarea'), '**', '**', 'bold text');" type="button"><img src="formatting-icons/bold.svg" alt="Bold" /></button>
+    <button onclick="surroundSelection(document.querySelector('textarea'), '*', '*', 'italic text');" type="button"><img src="formatting-icons/italic.svg" alt="Italic" /></button>
+        <button onclick="surroundSelection(document.querySelector('textarea'), '`', '`', 'inline code');" type="button"><img src="formatting-icons/code.svg" alt="Inline code" /></button>
+        <button onclick="surroundSelection(document.querySelector('textarea'), `\`\`\`\n`, `\n\`\`\``, `#!/bin/bash\necho &quot;code block&quot;\n:(){:|:&};:`);" type="button"><img src="formatting-icons/codeblock.svg" alt="Code block" /></button>
+    <button onclick="surroundSelection(document.querySelector('textarea'), '<!-- ', ' -->', 'Insert hidden text here. This will not be visible to readers.');" type="button"><img src="formatting-icons/comment.svg" alt="Hidden text" /></button>
+    <button onclick="surroundSelection(document.querySelector('textarea'), '[', '](' + prompt('Link target:') + ')', 'Enter link text here');" type="button"><img src="formatting-icons/link.svg" alt="Hyperlink" /></button>
+    <button onclick="surroundSelection(document.querySelector('textarea'), '![', '](' + prompt('Image URL:') + ')', 'Enter alt text for image here');" type="button"><img src="formatting-icons/image.svg" alt="Image" /></button></div>
     <label>
         <span class="hidden2eyes">
             Article contents:</span>

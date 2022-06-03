@@ -26,3 +26,26 @@
     width: 25%;
     min-width: 300px;
 }
+.toolbar {
+    box-sizing: border-box;
+    border: 1px solid black;
+    padding: 3px;
+    background-color: lightgray;
+}
+.toolbar button {
+    transition: none !important;
+    border-radius: none !important;
+    background-color: transparent !important;
+    border: 1px solid transparent !important; 
+    padding: 4px !important;
+    margin: none !important;
+    box-shadow: none !important
+}
+.toolbar > button:hover {
+    border: 1px solid black !important;
+    background-color: #f9f06b !important;
+}
+.toolbar > button > img {
+    height: 16px;
+    display: block;
+}
