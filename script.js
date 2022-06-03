@@ -160,5 +160,5 @@ function getArticles(page, changeURL = true) {
             document.getElementById('la-wrapper').hidden = '';
         });
 }
-getArticles(1);
+getArticles(1, false);
 if (pageURL.searchParams.get('page')) getArticles(pageURL.searchParams.get('page'), false);
