@@ -119,6 +119,8 @@ function loadArticle(id, changeURL = true) {
             return;
         }
         document.getElementById('articletitle').textContent = json.title;
+        document.getElementById('articleAuthor').textContent = json.creator;
+        document.getElementById('creationTime').textContent = new Date(json.creationDate);
         document.title = json.title;
         document.getElementById('articleContents').innerHTML = json.html;
         document.getElementById('article-viewer').hidden = '';
