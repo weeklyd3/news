@@ -120,7 +120,7 @@ function loadArticle(id, changeURL = true) {
         }
         document.getElementById('articletitle').textContent = json.title;
         document.getElementById('articleAuthor').textContent = json.creator;
-        document.getElementById('creationTime').textContent = new Date(json.creationDate);
+        document.getElementById('creationTime').textContent = new Date(json.creationDate * 1000);
         document.title = json.title;
         document.getElementById('articleContents').innerHTML = json.html;
         document.getElementById('article-viewer').hidden = '';
