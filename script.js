@@ -118,6 +118,8 @@ function loadArticle(id, changeURL = true) {
             document.getElementById('article-not-found').hidden = '';
             return;
         }
+        // Dummy edit, feel free to
+        // remove.
         document.getElementById('articletitle').textContent = json.title;
         document.getElementById('articleAuthor').textContent = json.creator;
         document.getElementById('creationTime').textContent = new Date(json.creationDate);
