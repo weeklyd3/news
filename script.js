@@ -99,11 +99,55 @@ function postArticle() {
         document.getElementById('poststatus').innerHTML += "\n" + '<span style="color:red;">There seems to be a problem with your network. Maybe you are not logged in?' + "\n" + 'Please log out and log back in, and check your internet connection. Your post has not been submitted.</span>';
     })
 }
-function loadArticle(id, changeURL = true) {
+function hideEverything() {
     document.getElementById('article-viewer').hidden = 'hidden';
+    document.getElementById('search').hidden = 'hidden';
     document.getElementById('article-not-found').hidden = 'hidden';
     document.getElementById('homescreen').hidden = 'hidden';
+}
+function search(query, modURL = true) {
+    hideEverything();
+    document.getElementById('search').hidden = '';
+    document.getElementById('searching').hidden = '';
+    document.getElementById('results').hidden = 'hidden';
+    document.title = `Searching for ${query}`;
+    var url = new URL(location.href);
+    url.searchParams.set('search', query);
+    if (modURL) history.pushState({}, '', url);
+    var searchURL = new URL(`${apiURL}/search.php`);
+    searchURL.searchParams.set('query', query);
+    document.getElementById('resultsList').innerHTML = '';
+    fetch(searchURL)
+    .then(function(res) {
+        return res.json();
+    })
+    .then(function(js) {
+        document.getElementById('searching').hidden = 'hidden';
+        for (var i = 0; i < js.length; i++) {
+            const result = js[i];
+            const resultPage = document.createElement('div');
+            const resultLink = document.createElement('a');
+            resultLink.innerHTML = result.title;
+            const articleURL = new URL(location.href);
+            articleURL.searchParams.delete('search');
+            articleURL.searchParams.set('article', result.id);
+            resultLink.href = articleURL;
+            resultPage.appendChild(resultLink);
+            const blurb = document.createElement('div');
+            blurb.innerHTML = result.htmlBlurb;
+            resultPage.appendChild(blurb);
+            document.getElementById('resultsList').appendChild(resultPage);
+        }
+        document.getElementById('results').hidden = '';
+    });
+}
+var params = new URL(location.href).searchParams;
+if (params.get('search')) search(params.get('search'), false);
+function loadArticle(id, changeURL = true) {
+    hideEverything();
     document.getElementById('article-loading').hidden = '';
+    document.getElementById('searching').hidden = '';
+    document.getElementById('results').hidden = 'hidden';
     var url = new URL(location.href);
     url.searchParams.set("article", id);
     if (changeURL) history.pushState({}, '', url);
