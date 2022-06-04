@@ -10,7 +10,7 @@
         <button onclick="surroundSelection(document.querySelector('textarea'), '`', '`', 'inline code');" type="button"><img src="formatting-icons/code.svg" alt="Inline code" /></button>
         <button onclick="surroundSelection(document.querySelector('textarea'), `\`\`\`\n`, `\n\`\`\``, `#!/bin/bash\necho &quot;code block&quot;\n:(){:|:&};:`);" type="button"><img src="formatting-icons/codeblock.svg" alt="Code block" /></button>
     <button onclick="surroundSelection(document.querySelector('textarea'), '<!-- ', ' -->', 'Insert hidden text here. This will not be visible to readers.');" type="button"><img src="formatting-icons/comment.svg" alt="Hidden text" /></button>
-    <button onclick="var linkTarget = prompt('Link target:');if(linkTarget)surroundSelection(document.querySelector('textarea'), '[', '](' +  + ')', 'Enter link text here');" type="button"><img src="formatting-icons/link.svg" alt="Hyperlink" /></button>
+    <button onclick="var linkTarget = prompt('Link target:');if(linkTarget)surroundSelection(document.querySelector('textarea'), '[', '](' + linkTarget  + ')', 'Enter link text here');" type="button"><img src="formatting-icons/link.svg" alt="Hyperlink" /></button>
     <button onclick="var imageURL = prompt('Image URL:');if (imageURL) surroundSelection(document.querySelector('textarea'), '![', '](' + imageURL + ')', 'Enter alt text for image here');" type="button"><img src="formatting-icons/image.svg" alt="Image" /></button></div>
     <label>
         <span class="hidden2eyes">

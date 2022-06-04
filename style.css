@@ -49,3 +49,10 @@
     height: 16px;
     display: block;
 }
+del {
+    background-color: red;
+    color: white;
+}
+ins {
+    background-color: lime;
+}
