@@ -37,8 +37,8 @@ document.getElementById('notloggedin').hidden = 'hidden';
         document.getElementById('loginStatusError').hidden = '';
     });
 }
-const accountWindowWidth = 200;
-const accountWindowHeight = 750;
+const accountWindowWidth = 500;
+const accountWindowHeight = 500;
 function startLogin() {
     window.open('login.html', 'Log in', `width=${accountWindowWidth},height=${accountWindowHeight},location=yes`);
 }
