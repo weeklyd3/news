@@ -9,6 +9,7 @@
     <button onclick="surroundSelection(document.querySelector('textarea'), '*', '*', 'italic text');" type="button"><img src="formatting-icons/italic.svg" alt="Italic" /></button>
         <button onclick="surroundSelection(document.querySelector('textarea'), '`', '`', 'inline code');" type="button"><img src="formatting-icons/code.svg" alt="Inline code" /></button>
         <button onclick="surroundSelection(document.querySelector('textarea'), `\`\`\`\n`, `\n\`\`\``, `#!/bin/bash\necho &quot;code block&quot;\n:(){:|:&};:`);" type="button"><img src="formatting-icons/codeblock.svg" alt="Code block" /></button>
+        <button type="button" onclick="document.getElementById('inserttable').hidden = ''; document.getElementById('inserttable').focus();"><img src="formatting-icons/table.svg" alt="Table" /></button>
     <button onclick="surroundSelection(document.querySelector('textarea'), '<!-- ', ' -->', 'Insert hidden text here. This will not be visible to readers.');" type="button"><img src="formatting-icons/comment.svg" alt="Hidden text" /></button>
     <button onclick="var linkTarget = prompt('Link target:');if(linkTarget)surroundSelection(document.querySelector('textarea'), '[', '](' + linkTarget  + ')', 'Enter link text here');" type="button"><img src="formatting-icons/link.svg" alt="Hyperlink" /></button>
     <button onclick="var imageURL = prompt('Image URL:');if (imageURL) surroundSelection(document.querySelector('textarea'), '![', '](' + imageURL + ')', 'Enter alt text for image here');" type="button"><img src="formatting-icons/image.svg" alt="Image" /></button></div>
@@ -34,3 +35,19 @@ Write your article below here:
     <input type="submit" value="Post Article" />
     <pre id="poststatus"></pre>
 </form>
+<div id="inserttable" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5);" hidden="hidden">
+    <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; padding: 7px;">
+        <form action="javascript:;" onsubmit="var a = [];for (var i = 0; i < document.getElementById('cols').value; i++) a[i] = 'cell contents here  '; var h = [];for (var i = 0; i < document.getElementById('cols').value; i++) h[i] = 'header contents here'; var hi = [];for (var i = 0; i < document.getElementById('cols').value; i++) {if (document.getElementById('center').checked) hi[i] = ':--------------------:'; if (document.getElementById('left').checked) hi[i] = ':---------------------'; if (document.getElementById('right').checked )hi[i] = '---------------------:';} var text = ''; for (var i = 0; i < parseInt(document.getElementById('rows').value) + 1; i++) {if (!i) {text += `| ${h.join(' | ')} |\n|${hi.join('|')}|\n`;} else {text += `| ${a.join(' | ')} |\n`;}}insertAtCursor(document.getElementById('contents'), `\n<!-- Beginning of table -->\n` + text + `\n<!-- End of table -->\n`); this.parentNode.parentNode.hidden = 'hidden'; document.getElementById('contents').focus();">
+            <h2>Insert a table</h2>
+            <label>Rows (not including header): <input id="rows" /></label><br />
+            <label>Columns: <input id="cols" /></label><br />
+            <fieldset><legend>Alignment of headers</legend>
+            <label><input id="left" type="radio" name="align" /> Left</label>
+                <label><input id="center" type="radio" name="align" checked="checked" /> Center</label>
+                <label><input id="right" type="radio" name="align" /> Right</label>
+            </fieldset>
+            <br />
+            <input type="submit" value="Insert table" />
+        </form>
+    </div>
+</div>
